@@ -1,0 +1,70 @@
+var GST=[
+            {
+                "category":"A",
+                "percentage":20
+            },
+            {
+                "category":"B",
+                "percentage":15
+            },
+            {
+                "category":"C",
+                "percentage":10
+            },
+            {
+                "category":"D",
+                "percentage":7
+            },
+            {
+                "category":"E",
+                "percentage":5
+            }
+        ]
+        var Data=[
+            {
+                "category":0,
+                "Ammount":0,
+                "Percentage":0,
+                "Amount_Deduction":0,
+                "Amount_After_Deduction":0
+            }
+        ]
+        function GST_Calculation(type,ammount)
+        {
+            Data.category=type;
+            Data.Ammount=ammount;
+            for(let i=0;i<GST.length;i++)
+            {
+                if(GST[i].category==type)
+                {
+                    var deduction=(ammount*GST[i].percentage)/100;
+                    var Amount_after_deduction=ammount-deduction;
+                    Data.Percentage=GST[i].percentage;
+                    Data.Amount_Deduction=deduction;
+                    Data.Amount_After_Deduction=Amount_after_deduction;
+                    return Data;
+                }
+                else
+                {
+                    deduction=0;
+                    Amount_after_deduction=ammount;
+                    Data.Percentage=0;
+                    Data.Amount_Deduction=deduction;
+                    Data.Amount_After_Deduction=ammount;
+                }
+            }
+            return Data;
+        }
+        var array=[];
+        array=GST_Calculation("A",12500);
+        console.log(array);
+        array=GST_Calculation("B",10000);
+        console.log(array);
+        array=GST_Calculation("C",21544);
+        console.log(array);
+        array=GST_Calculation("D",23510);
+        console.log(array);
+        array=GST_Calculation("E",21924);
+        console.log(array);
+        array=GST_Calculation("Z",999);
+        console.log(array);
